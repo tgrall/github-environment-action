@@ -4,7 +4,12 @@ const github = require('@actions/github');
 
 const action = async () => {    
     const gitHubToken = core.getInput('github_token');
-    const octokit = github.getOctokit(gitHubToken);
+    const octokit = github.getOctokit(
+                            gitHubToken, 
+                            {
+                                previews: ["ant-man-preview", "flash-preview"],
+                            }
+    );
 
 
     const environment = core.getInput('environment');
