@@ -18,13 +18,15 @@ const action = async () => {
 
     console.log("ENV : ", environment);
 
-    x = {        owner: owner,
+    x = {        
+        owner: owner,
         repo: repo,
         ref: github.context.ref,
         required_contexts: [],
         environment: environment,
         auto_merge: false,
-        transient_environment: true,;}
+        transient_environment: true,
+    };
     console.log("data:", x)
 
     const deployment = await octokit.rest.repos.createDeployment({
