@@ -22,7 +22,7 @@ const action = async () => {
         await  octokit.rest.repos.deleteAnEnvironment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            environment_id: environment
+            environment_name: environment
         }); 
     } else {    
 
