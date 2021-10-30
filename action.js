@@ -24,8 +24,8 @@ const action = async () => {
         ref: github.context.ref,
         required_contexts: [],
         environment: environment,
-        transient_environment: transient_environment,
-        production_environment: (production_environment == "true"),
+        transient_environment: (transient_environment.toLocaleLowerCase() == "true"),
+        production_environment: (production_environment.toLocaleLowerCase() == "true"),
     };   
     const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
 
