@@ -1,6 +1,10 @@
 name: 'GitHub Environment Action'
 description: 'Configure GitHub Environment from your workflow'
 inputs:
+  github_token:
+    description: 'GITHUB_TOKEN'
+    required: true
+    default: ${{ github.token }}  
   environment: 
     description: 'GitHub Environment name'
     required: true
