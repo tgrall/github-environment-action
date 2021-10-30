@@ -1,0 +1,6 @@
+name: 'GitHub Environment Action'
+description: 'Configure GitHub Environment from your workflow'
+runs:
+  using: 'node12'
+  main: 'index.js'
+  
