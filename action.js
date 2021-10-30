@@ -16,8 +16,8 @@ const action = async () => {
     console.log("ENV : ", environment);
 
     let deploymentPayload = {        
-        owner: github.context.owner,
-        repo: github.context.owner.repo,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
         ref: github.context.ref,
         required_contexts: [],
         environment: environment,
