@@ -4,10 +4,7 @@ const github = require('@actions/github');
 
 const action = async () => {    
     const gitHubToken = core.getInput('github_token');
-    const owner = core.getInput('owner');
-    const repo = core.getInput('repo');
-    const head = core.getInput('head');
-    const base = core.getInput('base');
+
 
     const octokit = github.getOctokit(gitHubToken);
 
@@ -19,8 +16,8 @@ const action = async () => {
     console.log("ENV : ", environment);
 
     x = {        
-        owner: owner,
-        repo: repo,
+        owner: github.context.owner,
+        repo: github.context.repo,
         ref: github.context.ref,
         required_contexts: [],
         environment: environment,
