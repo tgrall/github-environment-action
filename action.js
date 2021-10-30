@@ -40,7 +40,7 @@ const action = async () => {
     deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
 
     console.log(
-        "\n=========\ndeploymentStatusResult", JSON.stringify(deploymentStatusResult, null, '.');
+        "\n=========\ndeploymentStatusResult", JSON.stringify(deploymentStatusResult, null, '.')
     );
 
 
