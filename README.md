@@ -10,18 +10,21 @@ This action allows you to configure the environment from your workflow.
       uses: tgrall/github-environment-action@main
       with:
         environment: development
-        state: start
+        state: in_progress
 ```
+
+State : `error|failure|inactive|in_progress|queued|pending|success`
 
 If the `environment` does not exist it is created.
 
 
-## Delete an environment
+## Deployment done with a URL
 
 ```
-    - name: '🚢  - Start deployment'
+    - name: '🚀  - Deployment Done'
       uses: tgrall/github-environment-action@main
       with:
         environment: development
-        state: delete
+        state: success
+        url: http://github.com
 ```

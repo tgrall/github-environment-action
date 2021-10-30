@@ -12,19 +12,21 @@ const action = async () => {
 
     const environment = core.getInput('environment');
     const state = core.getInput('state');
+    const url = core.getInput('url');
+    const description = core.getInput('description');
+    const transient_environment = core.getInput('transient_environment');
+    const production_environment = core.getInput('production_environment');
 
-    console.log("ENV : ", environment);
-
+    // see https://octokit.github.io/rest.js/v18#repos-create-deployment    
     let deploymentPayload = {        
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         ref: github.context.ref,
         required_contexts: [],
         environment: environment,
-        auto_merge: false,
-        transient_environment: true,
-    };
-    
+        transient_environment: transient_environment,
+        production_environment: production_environment,
+    };   
     const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
 
 
@@ -33,9 +35,13 @@ const action = async () => {
         repo: github.context.repo.repo,
         deployment_id: deployment.data.id,
         state: state,
-        log_url: 'https://windr.org',
         description: 'new application !! '+ new Date(),
     };
+
+    if (url) {
+        deploymentStatusPayload.log_url = url,
+
+    }
 
     deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
 

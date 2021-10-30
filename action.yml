@@ -12,6 +12,21 @@ inputs:
     description: 'GitHub Environment state'
     required: true
     default: inactive
+  url:
+    description: 'Deployment url'
+    required: false
+  description:
+    description: 'Deployment description'
+    required: false 
+  transient_environment:
+    description: 'Transient environment'
+    required: false
+    default: false
+  production_environment:
+    description: 'Production environment'
+    required: false
+    default: false
+
 
 runs:
   using: 'node12'
