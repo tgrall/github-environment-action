@@ -24,37 +24,36 @@ const action = async () => {
             repo: github.context.repo.repo,
             environment_id: environment
         }); 
-        return;
+    } else {    
+
+        // see https://octokit.github.io/rest.js/v18#repos-create-deployment    
+        let deploymentPayload = {        
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            ref: github.context.ref,
+            required_contexts: [],
+            environment: environment,
+            transient_environment: (transient_environment.toLocaleLowerCase() == "true"),
+            production_environment: (production_environment.toLocaleLowerCase() == "true"),
+        };   
+        const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
+
+
+        let deploymentStatusPayload = {        
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            deployment_id: deployment.data.id,
+            state: state,
+            description: 'new application !! '+ new Date(),
+        };
+
+        if (url) {
+            deploymentStatusPayload.log_url = url
+        }
+
+        deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
+        
     }
-
-
-
-    // see https://octokit.github.io/rest.js/v18#repos-create-deployment    
-    let deploymentPayload = {        
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        ref: github.context.ref,
-        required_contexts: [],
-        environment: environment,
-        transient_environment: (transient_environment.toLocaleLowerCase() == "true"),
-        production_environment: (production_environment.toLocaleLowerCase() == "true"),
-    };   
-    const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
-
-
-    let deploymentStatusPayload = {        
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        deployment_id: deployment.data.id,
-        state: state,
-        description: 'new application !! '+ new Date(),
-    };
-
-    if (url) {
-        deploymentStatusPayload.log_url = url
-    }
-
-    deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
 
 
 }
