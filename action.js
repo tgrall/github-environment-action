@@ -6,9 +6,21 @@ const action = async () => {
     const gitHubToken = core.getInput('github_token');
 
     const environment = core.getInput('environment');
-
+    const state = core.getInput('state');
 
     console.log("ENV : ", environment);
+
+
+    console.log(
+    github.repos.createDeploymentStatus({
+        ...context.repo,
+        deployment_id: environment,
+        state: state,
+        mediaType: { previews: ['flash', 'ant-man'] }
+      })
+    );
+
+
 
 }
 
