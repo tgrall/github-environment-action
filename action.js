@@ -25,7 +25,7 @@ const action = async () => {
         required_contexts: [],
         environment: environment,
         transient_environment: transient_environment,
-        production_environment: production_environment,
+        production_environment: (production_environment == "true"),
     };   
     const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
 
@@ -39,8 +39,7 @@ const action = async () => {
     };
 
     if (url) {
-        deploymentStatusPayload.log_url = url,
-
+        deploymentStatusPayload.log_url = url
     }
 
     deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
