@@ -4,7 +4,11 @@ const github = require('@actions/github');
 
 const action = async () => {    
     const gitHubToken = core.getInput('github_token');
-    console.log("test");
+
+    const environment = core.getInput('environment');
+
+
+    console.log("ENV : ", environment);
 
 }
 
