@@ -37,7 +37,7 @@ const action = async () => {
         description: 'new application !! '+ new Date(),
     };
 
-    await deploymentStatusResult = octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
+    deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
 
     console.log(
         "\n=========\ndeploymentStatusResult", JSON.stringify(deploymentStatusResult, null, '.');
