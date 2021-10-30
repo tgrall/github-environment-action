@@ -18,7 +18,7 @@ const action = async () => {
     const production_environment = core.getInput('production_environment');
 
 
-    if ( state.toLocaleLowerCase == "delete" ) {
+    if ( state.toLocaleLowerCase() == "delete" ) {
         await octokit.repos.deleteEnvironment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
