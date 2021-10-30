@@ -31,7 +31,7 @@ const action = async () => {
     console.log(
         "deployment",
 
-        JSON.stringify(deployment)
+        JSON.stringify(deployment, null, '...')
 
     );
 
