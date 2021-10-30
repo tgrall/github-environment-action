@@ -28,3 +28,14 @@ If the `environment` does not exist it is created.
         state: success
         url: http://github.com
 ```
+
+## Delete Environment
+
+
+```
+    - name: '🗑️   - Delete Environment'
+      uses: tgrall/github-environment-action@main
+      with:
+        environment: development
+        state: delete
+```

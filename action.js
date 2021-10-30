@@ -17,6 +17,18 @@ const action = async () => {
     const transient_environment = core.getInput('transient_environment');
     const production_environment = core.getInput('production_environment');
 
+
+    if ( state.toLocaleLowerCase == "delete" ) {
+        await octokit.repos.deleteEnvironment({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            environment_id: environment
+        }); 
+        return;
+    }
+
+
+
     // see https://octokit.github.io/rest.js/v18#repos-create-deployment    
     let deploymentPayload = {        
         owner: github.context.repo.owner,
