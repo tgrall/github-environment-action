@@ -24,27 +24,25 @@ const action = async () => {
         auto_merge: false,
         transient_environment: true,
     };
-    console.log("data:", deploymentPayload)
-
+    
     const deployment = await octokit.rest.repos.createDeployment(deploymentPayload);
 
+
+    let deploymentStatusPayload = {        
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        deployment_id: deployment.data.id,
+        state: "in_progress",
+        log_url: 'https://windr.org',
+        description: 'new application !! '+ new Date(),
+    };
+
+    await deploymentStatusResult = octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
+
     console.log(
-        "deployment",
-
-        JSON.stringify(deployment, null, '...')
-
+        "\n=========\ndeploymentStatusResult", JSON.stringify(deploymentStatusResult, null, '.');
     );
 
-
-    await octokit.rest.repos.createDeploymentStatus({
-        owner: owner,
-        repo: repo,
-        deployment_id: parseInt(deploymentID, 10),
-        state: "in_progress",
-        auto_inactive: args.autoInactive,
-        log_url: args.logsURL,
-        description: args.description,
-      });
 
 
 
