@@ -17,15 +17,13 @@ const action = async () => {
 
     console.log("ENV : ", environment);
 
-
-    console.log(
-    octokit.rest.repos.createDeploymentStatus({
+    await octokit.rest.repos.createDeploymentStatus({
         ...github.context.repo,
         deployment_id: environment,
         state: state,
-        mediaType: { previews: ['flash', 'ant-man'] }
-      })
-    );
+        description: "test tug "+ new Date(),
+
+    });
 
 
 
