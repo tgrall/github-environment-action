@@ -19,7 +19,7 @@ const action = async () => {
 
 
     if ( state.toLocaleLowerCase() == "delete" ) {
-        await octokit.repos.deleteEnvironment({
+        await octokit.rest.repos.deleteEnvironment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             environment_id: environment
