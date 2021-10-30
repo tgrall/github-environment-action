@@ -12,7 +12,7 @@ const action = async () => {
 
 
     console.log(
-    github.repos.createDeploymentStatus({
+    github.rest.repos.createDeploymentStatus({
         ...context.repo,
         deployment_id: environment,
         state: state,
