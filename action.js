@@ -19,11 +19,14 @@ const action = async () => {
 
 
     if ( state.toLocaleLowerCase() == "delete" ) {
-        await  octokit.rest.repos.deleteAnEnvironment({
+        let deleteResult = await  octokit.rest.repos.deleteAnEnvironment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             environment_name: environment
         }); 
+
+        console.log("deleteResult", JSON.stringify(deleteResult, null, '.'));
+
     } else {    
 
         // see https://octokit.github.io/rest.js/v18#repos-create-deployment    
