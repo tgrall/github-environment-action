@@ -6,6 +6,8 @@ const action = async () => {
     const gitHubToken = core.getInput('github_token');
     const owner = core.getInput('owner');
     const repo = core.getInput('repo');
+    const head = core.getInput('head');
+    const base = core.getInput('base');
 
     const octokit = github.getOctokit(gitHubToken);
 
@@ -19,11 +21,11 @@ const action = async () => {
     const deployment = await octokit.rest.repos.createDeployment({
         owner: owner,
         repo: repo,
-        ref: args.gitRef,
+        ref: github.context.ref,
         required_contexts: [],
-        environment: args.environment,
+        environment: environment,
         auto_merge: false,
-        transient_environment: args.transient,
+        transient_environment: true,
       });
 
     console.log(
