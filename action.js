@@ -32,18 +32,12 @@ const action = async () => {
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         deployment_id: deployment.data.id,
-        state: "in_progress",
+        state: state,
         log_url: 'https://windr.org',
         description: 'new application !! '+ new Date(),
     };
 
     deploymentStatusResult =  await octokit.rest.repos.createDeploymentStatus(deploymentStatusPayload);
-
-    console.log(
-        "\n=========\ndeploymentStatusResult", JSON.stringify(deploymentStatusResult, null, '.')
-    );
-
-
 
 
 }

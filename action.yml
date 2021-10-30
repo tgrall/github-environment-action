@@ -12,6 +12,7 @@ inputs:
     description: 'GitHub Environment state'
     required: true
     default: inactive
+
 runs:
   using: 'node12'
   main: 'index.js'
