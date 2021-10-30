@@ -7,12 +7,8 @@ const action = async () => {
     const owner = core.getInput('owner');
     const repo = core.getInput('repo');
 
-    const octokit = github.getOctokit(
-                            gitHubToken, 
-                            {
-                                previews: ["ant-man-preview", "flash-preview"],
-                            }
-    );
+    const octokit = github.getOctokit(gitHubToken);
+
 
 
     const environment = core.getInput('environment');
@@ -20,7 +16,7 @@ const action = async () => {
 
     console.log("ENV : ", environment);
 
-    const deployment = await github.rest.repos.createDeployment({
+    const deployment = await octokit.rest.repos.createDeployment({
         owner: owner,
         repo: repo,
         ref: args.gitRef,
@@ -38,7 +34,7 @@ const action = async () => {
     );
 
 
-    await github.rest.repos.createDeploymentStatus({
+    await octokit.rest.repos.createDeploymentStatus({
         owner: owner,
         repo: repo,
         deployment_id: parseInt(deploymentID, 10),
