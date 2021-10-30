@@ -13,7 +13,7 @@ const action = async () => {
 
     console.log(
     github.rest.repos.createDeploymentStatus({
-        ...context.repo,
+        ...github.context.repo,
         deployment_id: environment,
         state: state,
         mediaType: { previews: ['flash', 'ant-man'] }
