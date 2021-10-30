@@ -21,8 +21,6 @@ const action = async () => {
         ...github.context.repo,
         deployment_id: environment,
         state: state,
-        description: "test tug "+ new Date(),
-
     });
 
 
